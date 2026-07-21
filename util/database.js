@@ -3,21 +3,24 @@ const MongoClient = mongodb.MongoClient;
 
 let _db;
 
-const mongoConnect = callback => {
+const mongoConnect = (callback) => {
   MongoClient.connect(
-    ''//your connector
+    'mongodb+srv://dzhuro1988_db_user:bSQou8zLNVCYIkZR@cluster0.m8eavvv.mongodb.net/shop', //your connector
   )
-    .then(client => {
-      console.log('Connected!');
+    .then((client) => {
+      console.log('Connected DB!');
+      // _db is a global variable that stores the database object
       _db = client.db();
       callback();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       throw err;
     });
 };
 
+// getDb is a function that returns the database object
+// it is used to get the database object in the other files
 const getDb = () => {
   if (_db) {
     return _db;
